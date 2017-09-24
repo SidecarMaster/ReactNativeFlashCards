@@ -5,14 +5,15 @@ import { Provider } from 'react-redux'
 import reducer from './src/reducers'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
-import { DeckList, DeckDetail, connectAddDeck, Quiz, AddCard } from './src/screens'
+import { connectDeckList, DeckDetail, Quiz, AddCard } from './src/screens'
+import AddDeck from './src/screens/AddDeck'
 
 const Home = TabNavigator({
   DeckList: {
-    screen: DeckList,
+    screen: connectDeckList,
   },
   AddDeck: {
-    screen: connectAddDeck,
+    screen: AddDeck,
   }
 },{
   tabBarOptions: {

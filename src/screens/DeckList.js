@@ -1,12 +1,21 @@
 import React from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, AsyncStorage } from 'react-native'
+import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
+import { getDecks } from '../utils/api'
 
 class DeckList extends React.Component {
   static navigationOptions = {
     title: 'Home',
     tabBarIcon: ({tintColor})=><Ionicons name='ios-home' size={30} color={tintColor}/>,
     header: null,
+  }
+
+  componentDidMount() {
+    console.log(this.props.storage)
+    getDecks().then((results)=>{
+      console.log(results)
+    })
   }
 
   render () {
@@ -28,4 +37,6 @@ class DeckList extends React.Component {
 //
 // })
 
-export { DeckList };
+const connectDeckList = connect(({storage})=>({storage}))(DeckList)
+
+export { connectDeckList };

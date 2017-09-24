@@ -5,6 +5,7 @@ import {
 } from '../actions'
 
 function storage(state={}, action) {
+  console.log('action received')
   switch (action.type) {
     case ADD_DECK:
       return {[action.payload]:{title:action.payload, questions:[]}}

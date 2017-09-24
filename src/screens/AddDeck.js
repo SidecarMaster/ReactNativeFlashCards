@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { FontAwesome } from '@expo/vector-icons'
 import { Card, CardSection, Title, Input, Button } from '../components/common'
 import { addDeck } from '../actions'
+import { saveDeckTitle } from '../utils/api'
 
 class AddDeck extends React.Component {
   static navigationOptions = {
@@ -16,8 +17,26 @@ class AddDeck extends React.Component {
     deckTitle: ''
   }
 
+  componentDidMount(){
+    console.log(this.props.addDeck)
+  }
+
   onButtonPress = () => {
-    this.props.addDeck(this.state.deckTitle)
+    const { deckTitle } = this.state
+    const { navigation } = this.props
+
+    // save deck title to Redux store
+    this.props.addDeck(deckTitle)
+
+    // save deck title to AsyncStorage
+    saveDeckTitle(deckTitle)
+
+    // clear AddDeck form state
+    this.setState({deckTitle:''})
+
+    // navigate to Home
+    navigation.navigate('Home')
+
   }
 
   render () {
@@ -45,6 +64,10 @@ class AddDeck extends React.Component {
   }
 }
 
-const connectAddDeck = connect(null, { addDeck })(AddDeck)
+function mapStateToProps({storage}){
+  return {
+    storage
+  }
+}
 
-export { connectAddDeck };
+export default connect(mapStateToProps, { addDeck })(AddDeck);
