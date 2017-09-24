@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, StatusBar } from 'react-native';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
+import ReduxPromise from 'redux-promise'
+import ReduxThunk from 'redux-thunk'
 import reducer from './src/reducers'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
@@ -44,7 +46,11 @@ function AppStatusBar ({backgroundColor, ...props}) {
   )
 }
 
-const store = createStore(reducer)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducer, composeEnhancers(
+  applyMiddleware(ReduxPromise, ReduxThunk),
+))
 
 export default class App extends React.Component {
   render() {

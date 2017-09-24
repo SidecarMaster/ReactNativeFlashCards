@@ -10,15 +10,10 @@ class AddDeck extends React.Component {
   static navigationOptions = {
     title: 'Add Deck',
     tabBarIcon: ({tintColor})=><FontAwesome name='plus-square' size={30} color={tintColor} />,
-    header: null,
   }
 
   state = {
     deckTitle: ''
-  }
-
-  componentDidMount(){
-    console.log(this.props.addDeck)
   }
 
   onButtonPress = () => {
@@ -44,7 +39,7 @@ class AddDeck extends React.Component {
     return (
       <Card>
         <CardSection>
-          <Title label={'What is the title of your new deck?'} />
+          <Title title={'What is the title of your new deck?'} />
         </CardSection>
         <CardSection>
           <Input
@@ -64,10 +59,4 @@ class AddDeck extends React.Component {
   }
 }
 
-function mapStateToProps({storage}){
-  return {
-    storage
-  }
-}
-
-export default connect(mapStateToProps, { addDeck })(AddDeck);
+export default connect(({storage})=>({storage}), { addDeck })(AddDeck);

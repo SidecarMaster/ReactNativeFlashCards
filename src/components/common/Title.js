@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Title = ({label}) => {
+const Title = ({title, subtitle}) => {
   return (
     <View style={styles.containerStyle}>
-      <Text style={styles.textStyle}>{label}</Text>
+      <Text style={styles.titleStyle}>{title}</Text>
+      {subtitle && <Text style={styles.subtitleStyle}>{subtitle}</Text>}
     </View>
   );
 };
@@ -17,10 +18,13 @@ const styles = StyleSheet.create(
       alignItems: 'center',
       justifyContent: 'center',
     },
-    textStyle: {
+    titleStyle: {
       fontSize: 20,
-      paddingLeft: 20,
       lineHeight: 23,
+    },
+    subtitleStyle: {
+      fontSize: 16,
+      color: 'gray',
     }
   }
 );

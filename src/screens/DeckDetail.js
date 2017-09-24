@@ -1,22 +1,30 @@
 import React from 'react'
 import { View, Text, Button } from 'react-native'
 
+import { Card, CardSection, Title } from '../components/common'
+
 class DeckDetail extends React.Component {
   render () {
-    const { navigation } = this.props
+    const { navigate, state } = this.props.navigation
+    const { title, questions } = state.params.item
 
     return (
-      <View>
-        <Text>DeckDetail</Text>
+      <Card>
+        <CardSection>
+          <Title
+            title={title}
+            subtitle={`${questions.length} ${(questions.length<2)?'card':'cards'}`}
+          />
+        </CardSection>
         <Button
-          onPress={()=>navigation.navigate('AddCard')}
+          onPress={()=>navigate('AddCard')}
           title="Add Card"
         />
         <Button
-          onPress={()=>navigation.navigate('Quiz')}
+          onPress={()=>navigate('Quiz')}
           title="Quiz"
         />
-      </View>
+    </Card>
     )
   }
 }

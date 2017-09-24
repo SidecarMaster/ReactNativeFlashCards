@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
 
 import {
-  ADD_DECK
+  ALL_INFO,
+  ADD_DECK,
 } from '../actions'
 
 function storage(state={}, action) {
-  console.log('action received')
   switch (action.type) {
+    case ALL_INFO:
+      return action.payload
     case ADD_DECK:
       return {[action.payload]:{title:action.payload, questions:[]}}
     default:

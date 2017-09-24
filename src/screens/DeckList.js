@@ -1,33 +1,53 @@
 import React from 'react'
-import { View, Text, Button, AsyncStorage } from 'react-native'
+import { View, Text, Button, AsyncStorage, FlatList, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
+import _ from 'lodash'
+
+import { Card, CardSection, Title } from '../components/common'
+import { allInfo } from '../actions'
 import { getDecks } from '../utils/api'
 
 class DeckList extends React.Component {
   static navigationOptions = {
     title: 'Home',
     tabBarIcon: ({tintColor})=><Ionicons name='ios-home' size={30} color={tintColor}/>,
-    header: null,
   }
 
   componentDidMount() {
-    console.log(this.props.storage)
-    getDecks().then((results)=>{
-      console.log(results)
+    const { allInfo } = this.props
+    getDecks().then((data)=>{
+      allInfo(data)
     })
   }
 
-  render () {
+  renderItem = ({item}) => {
     const { navigation } = this.props
+    return (
+      <Card>
+        <TouchableHighlight onPress={()=>navigation.navigate('DeckDetail', {item})}>
+          <View>
+            <CardSection>
+              <Title
+                title={item.title}
+                subtitle={`${item.questions.length} ${(item.questions.length<2)?'card':'cards'}`}
+              />
+            </CardSection>
+          </View>
+        </TouchableHighlight>
+      </Card>
+    )
+  }
 
+  render () {
+    const { storage } = this.props
     return (
       <View>
-        <Text>DeckList</Text>
-        <Button
-          onPress={()=>navigation.navigate('DeckDetail')}
-          title="Go to Deck Detail"
-        />
+        <FlatList
+          data={_.map(storage)}
+          renderItem={this.renderItem}
+          keyExtractor={(item)=>item.title}
+          />
       </View>
     )
   }
@@ -37,6 +57,6 @@ class DeckList extends React.Component {
 //
 // })
 
-const connectDeckList = connect(({storage})=>({storage}))(DeckList)
+const connectDeckList = connect(({storage})=>({storage}), {allInfo})(DeckList)
 
 export { connectDeckList };
