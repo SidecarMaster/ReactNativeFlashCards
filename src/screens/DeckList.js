@@ -21,16 +21,17 @@ class DeckList extends React.Component {
     })
   }
 
-  renderItem = ({item}) => {
-    const { navigation } = this.props
+  renderItem = ({ item : { title, questions } }) => {
+    const { navigate } = this.props.navigation
+
     return (
       <Card>
-        <TouchableHighlight onPress={()=>navigation.navigate('DeckDetail', {item})}>
+        <TouchableHighlight onPress={()=>navigate('DeckDetail', {title})}>
           <View>
             <CardSection>
               <Title
-                title={item.title}
-                subtitle={`${item.questions.length} ${(item.questions.length<2)?'card':'cards'}`}
+                title={title}
+                subtitle={`${questions.length} ${(questions.length<2)?'card':'cards'}`}
               />
             </CardSection>
           </View>

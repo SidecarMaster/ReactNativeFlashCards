@@ -4,18 +4,23 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import ReduxPromise from 'redux-promise'
 import ReduxThunk from 'redux-thunk'
-import reducer from './src/reducers'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
-import { connectDeckList, DeckDetail, Quiz, AddCard } from './src/screens'
-import AddDeck from './src/screens/AddDeck'
+import { FontAwesome } from '@expo/vector-icons'
+
+import reducer from './src/reducers'
+import { connectDeckList, connectAddDeck, connectDeckDetail, Quiz, connectAddCard } from './src/screens'
 
 const Home = TabNavigator({
   DeckList: {
     screen: connectDeckList,
   },
   AddDeck: {
-    screen: AddDeck,
+    screen: connectAddDeck,
+    navigationOptions: {
+      title: 'Add Deck',
+      tabBarIcon: ({tintColor})=><FontAwesome name='plus-square' size={30} color={tintColor} />,
+    }
   }
 },{
   tabBarOptions: {
@@ -28,10 +33,10 @@ const Stacks = StackNavigator({
     screen: Home,
   },
   DeckDetail: {
-    screen: DeckDetail,
+    screen: connectDeckDetail,
   },
   AddCard: {
-    screen: AddCard,
+    screen: connectAddCard,
   },
   Quiz: {
     screen: Quiz,

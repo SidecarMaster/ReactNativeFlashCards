@@ -1,9 +1,10 @@
 import React from 'react';
 import { TextInput, View, Text, StyleSheet } from 'react-native';
 
-const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
+const Input = ({ label, value, onChangeText, placeholder, secureTextEntry, ...rest }) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
-
+  // !!! You have to pass all the arguments(functions inside) to TextInput 
+  //     to link redux-form and TextInput.
   return (
     <View style={containerStyle}>
       <Text style={labelStyle}>{label}</Text>
@@ -14,6 +15,7 @@ const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => 
         style={inputStyle}
         value={value}
         onChangeText={onChangeText}
+        {...rest}
       />
     </View>
   );
@@ -35,9 +37,10 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     height: 40,
-    flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 10,
   }
 });
 

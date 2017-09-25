@@ -1,12 +1,17 @@
 import React from 'react'
 import { View, Text, Button } from 'react-native'
+import { connect } from 'react-redux'
 
 import { Card, CardSection, Title } from '../components/common'
 
 class DeckDetail extends React.Component {
+  static navigationOptions = {
+    title: 'Deck Detail',
+  }
+
   render () {
-    const { navigate, state } = this.props.navigation
-    const { title, questions } = state.params.item
+    const { navigate, state: { params: { title } } } = this.props.navigation
+    const { questions } = this.props.storage[`${title}`]
 
     return (
       <Card>
@@ -17,11 +22,11 @@ class DeckDetail extends React.Component {
           />
         </CardSection>
         <Button
-          onPress={()=>navigate('AddCard')}
+          onPress={()=>navigate('AddCard', {title})}
           title="Add Card"
         />
         <Button
-          onPress={()=>navigate('Quiz')}
+          onPress={()=>navigate('Quiz', {title, questions})}
           title="Quiz"
         />
     </Card>
@@ -29,4 +34,6 @@ class DeckDetail extends React.Component {
   }
 }
 
-export { DeckDetail };
+const connectDeckDetail = connect(({storage})=>({storage}))(DeckDetail)
+
+export { connectDeckDetail };
