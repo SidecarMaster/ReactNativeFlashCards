@@ -12,10 +12,12 @@ function storage(state={}, action) {
     case ALL_INFO:
       return action.data
     case ADD_DECK:
-      return {[action.title]:{title:action.title, questions:[]}}
+      return {...state, [action.title]:{title:action.title, questions:[]}}
     case ADD_CARD:
       const { title, card: {question, answer} } = action
-      return {[title]:{title, questions:[{question, answer}]}}
+      return {...state,
+        [title]:{title, questions:[...state[`${title}`].questions, {question, answer}]}
+      }
     default:
       return state
   }

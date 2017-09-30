@@ -1,18 +1,14 @@
 import React from 'react'
 import { View, Text, Button, AsyncStorage, FlatList, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
-import { Ionicons } from '@expo/vector-icons'
+import { EvilIcons } from '@expo/vector-icons'
 import _ from 'lodash'
 
-import { Card, CardSection, Title } from '../components/common'
+import { Card, Title, CardSection } from '../components/common'
 import { allInfo } from '../actions'
 import { getDecks } from '../utils/api'
 
 class DeckList extends React.Component {
-  static navigationOptions = {
-    title: 'Home',
-    tabBarIcon: ({tintColor})=><Ionicons name='ios-home' size={30} color={tintColor}/>,
-  }
 
   componentDidMount() {
     const { allInfo } = this.props
@@ -25,18 +21,20 @@ class DeckList extends React.Component {
     const { navigate } = this.props.navigation
 
     return (
-      <Card>
-        <TouchableHighlight onPress={()=>navigate('DeckDetail', {title})}>
-          <View>
+      <TouchableHighlight onPress={()=>navigate('DeckDetail', {title})}>
+        <View>
+          <Card>
             <CardSection>
+              <EvilIcons name='archive' size={60} color='#0b68df' />
               <Title
                 title={title}
                 subtitle={`${questions.length} ${(questions.length<2)?'card':'cards'}`}
               />
             </CardSection>
-          </View>
-        </TouchableHighlight>
-      </Card>
+          </Card>
+        </View>
+      </TouchableHighlight>
+
     )
   }
 

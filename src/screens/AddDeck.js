@@ -30,14 +30,14 @@ class AddDeck extends React.Component {
 
     return (
       <View>
-          <Input
-            type='text'
-            label={field.label}
-            error={errorAttr}
-            placeholder={field.placeholder}
-            onChangeText={field.input.onChange}
-            {...field.input}
-          />
+        <Input
+          type='text'
+          label={field.label}
+          error={errorAttr}
+          placeholder={field.placeholder}
+          onChangeText={field.input.onChange}
+          {...field.input}
+        />
         <Text>
           { touched ? error : '' }
         </Text>

@@ -1,30 +1,59 @@
 import React from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, Dimensions } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import ReduxPromise from 'redux-promise'
 import ReduxThunk from 'redux-thunk'
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import { Constants } from 'expo'
-import { FontAwesome } from '@expo/vector-icons'
+import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
 import reducer from './src/reducers'
 import { connectDeckList, connectAddDeck, connectDeckDetail, Quiz, connectAddCard } from './src/screens'
 
+const SCREEN_HEIGHT = Dimensions.get('window').height
+const tabBarIconSize = 40
+
 const Home = TabNavigator({
   DeckList: {
     screen: connectDeckList,
+    navigationOptions: {
+      title: 'Home',
+      tabBarIcon: ({tintColor})=><Ionicons name='ios-home' size={tabBarIconSize} color={tintColor}/>,
+      headerStyle: {
+        backgroundColor: '#010101',
+      },
+      headerTitleStyle: {
+        color: 'white'
+      },
+    }
   },
   AddDeck: {
     screen: connectAddDeck,
     navigationOptions: {
       title: 'Add Deck',
-      tabBarIcon: ({tintColor})=><FontAwesome name='plus-square' size={30} color={tintColor} />,
+      tabBarIcon: ({tintColor})=><Ionicons name='ios-add' size={tabBarIconSize} color={tintColor} />,
+      headerStyle: {
+        backgroundColor: '#010101',
+      },
+      headerTitleStyle: {
+        color: 'white'
+      },
     }
   }
 },{
   tabBarOptions: {
-    activeTintColor: '#e91e63',
+    activeTintColor: '#01bdfa',
+    inactiveTintColor: '#6d8496',
+    style: {
+      backgroundColor: '#151c24',
+      height: SCREEN_HEIGHT*0.11,
+      paddingTop: 10,
+      paddingBottom: 6,
+    },
+    labelStyle: {
+      fontSize: 12
+    }
   }
 })
 
@@ -41,6 +70,10 @@ const Stacks = StackNavigator({
   Quiz: {
     screen: Quiz,
   },
+},{
+  cardStyle: {
+    backgroundColor: '#10131c'
+  }
 })
 
 function AppStatusBar ({backgroundColor, ...props}) {
@@ -62,7 +95,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{flex:1}}>
-          <AppStatusBar backgroundColor={'black'} barStyle="light-content" />
+          <AppStatusBar backgroundColor={'#010101'} barStyle="light-content" />
           <Stacks />
         </View>
       </Provider>

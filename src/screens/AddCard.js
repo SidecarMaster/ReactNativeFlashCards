@@ -11,7 +11,7 @@ import { addCardToDeck } from '../utils/api'
 class AddCard extends React.Component {
 
   onButtonPress = ({question, answer}) => {
-    const { navigate, state : { params : { title } } } = this.props.navigation
+    const { goBack, state : { params : { title } } } = this.props.navigation
 
     // save deck title to Redux store
     this.props.addCard(title, {question, answer})
@@ -19,8 +19,8 @@ class AddCard extends React.Component {
     // save deck title to AsyncStorage
     addCardToDeck(title, {question, answer})
 
-    // navigate to DeckDetail
-    navigate('DeckDetail', {title})
+    // goBack to DeckDetail
+    goBack()
 
   }
 

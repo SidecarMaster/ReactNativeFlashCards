@@ -29,7 +29,7 @@ class DeckDetail extends React.Component {
           onPress={()=>navigate('Quiz', {title, questions})}
           title="Quiz"
         />
-    </Card>
+      </Card>
     )
   }
 }
