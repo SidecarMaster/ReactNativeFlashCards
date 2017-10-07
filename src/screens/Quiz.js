@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
     backfaceVisibility: "hidden",
     position: "absolute",
     top: 0,
-    // <Card> marginLeft & marginRight are 5 each, and borderWidth is 1.
-    width: SCREEN_WIDTH-12,
+    // <Card> marginLeft & marginRight are 5 each, and paddingLeft & paddingRight 10 each.
+    width: SCREEN_WIDTH-30,
     height: FLIPCARD_HEIGHT,
     borderBottomWidth: 1,
     padding: 5,
