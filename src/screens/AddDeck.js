@@ -8,7 +8,7 @@ import { addDeck } from '../actions'
 import { saveDeckTitle } from '../utils/api'
 
 class AddDeck extends React.Component {
-  // When you use Redux form, your class property will be overwritten. You can put it in TabNavigator.
+  // When you use Redux form, your class property will be overwritten. You must put navigationOptions in TabNavigator.
 
   onButtonPress = (values) => {
     const { navigation } = this.props

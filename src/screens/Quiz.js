@@ -78,8 +78,9 @@ class Quiz extends React.Component {
       return (
         <Card>
           <CardSection>
-            <Text>
-              {`I got the answers to ${Math.round(score/questionsNo*100)}% of questions.`}
+            <Text style={styles.resultStyle}>
+              {`👏🏻👏🏻 I got the answers to
+${Math.round(score/questionsNo*100)}% of the questions. 👏🏻👏🏻`}
             </Text>
           </CardSection>
         </Card>
@@ -149,6 +150,11 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     marginTop: FLIPCARD_HEIGHT
+  },
+  resultStyle: {
+    fontSize: 16,
+    fontWeight: '400',
+    lineHeight: 23,
   }
 })
 

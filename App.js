@@ -10,7 +10,9 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
 import reducer from './src/reducers'
 import { connectDeckList, connectAddDeck, connectDeckDetail, Quiz, connectAddCard } from './src/screens'
+import { BackButton } from './src/components/common'
 import { headerColor } from './src/utils/colors'
+import { setLocalNotification } from './src/utils/helpers'
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const tabBarIconSize = 40
@@ -64,10 +66,20 @@ const Stacks = StackNavigator({
   },
   DeckDetail: {
     screen: connectDeckDetail,
+    navigationOptions: ({navigation}) => ({
+      title: 'Deck Detail',
+      headerStyle: {
+        backgroundColor: headerColor,
+      },
+      headerTitleStyle: {
+        color: 'white'
+      },
+      headerLeft: <BackButton navigation={navigation}/>
+    })
   },
   AddCard: {
     screen: connectAddCard,
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
       title: 'Add Card',
       headerStyle: {
         backgroundColor: headerColor,
@@ -75,11 +87,12 @@ const Stacks = StackNavigator({
       headerTitleStyle: {
         color: 'white'
       },
-    }
+      headerLeft: <BackButton navigation={navigation}/>
+    })
   },
   Quiz: {
     screen: Quiz,
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
       title: 'Quiz',
       headerStyle: {
         backgroundColor: headerColor,
@@ -87,7 +100,8 @@ const Stacks = StackNavigator({
       headerTitleStyle: {
         color: 'white'
       },
-    }
+      headerLeft: <BackButton navigation={navigation}/>
+    })
   },
 },{
   cardStyle: {
@@ -111,6 +125,10 @@ const store = createStore(reducer, composeEnhancers(
 ))
 
 export default class App extends React.Component {
+  componentDidMount(){
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={store}>

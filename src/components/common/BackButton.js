@@ -1,13 +1,22 @@
-import React from 'react'
-import { TouchableHighlight } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import React from 'react';
+import { TouchableHighlight, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const BackButton = ({navigation, path}) => {
+const BackButton = ({navigation}) => {
   return (
-    <TouchableHighlight onPress={()=>navigation.goBack()}>
-      <Ionicons name='ios-arrow-back' size={30} color='#8091a5' />
+    <TouchableHighlight style={styles.containerStyle} onPress={()=>navigation.goBack()}>
+      <Ionicons name='ios-arrow-round-back-outline' size={45} color='#8091a5' style={styles.backArrowStyle} />
     </TouchableHighlight>
   )
 };
+
+const styles = StyleSheet.create({
+  containerStyle: {
+    marginLeft: 10,
+  },
+  backArrowStyle: {
+    fontWeight: '900',
+  }
+})
 
 export { BackButton };

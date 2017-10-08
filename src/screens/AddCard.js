@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { NavigationActions } from 'react-navigation'
 
-import { Card, CardSection, Form, Title, Input, Button } from '../components/common'
+import { Card, CardSection, Form, Title, Input, Button, BackButton } from '../components/common'
 import { addCard } from '../actions'
 import { addCardToDeck } from '../utils/api'
+import { headerColor } from '../utils/colors'
 
 class AddCard extends React.Component {
 

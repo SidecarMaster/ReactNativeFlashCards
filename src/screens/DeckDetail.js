@@ -3,22 +3,11 @@ import { View, Text, Button, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
 
-
-import { Card, CardSection, Title, BackButton } from '../components/common'
+// Don't forget to export * in the index.js file in common
+import { BackButton, Card, CardSection, Title } from '../components/common'
 import { headerColor } from '../utils/colors'
 
 class DeckDetail extends React.Component {
-
-  static navigationOptions = ({navigation}) => ({
-    title: 'Deck Detail',
-    headerStyle: {
-      backgroundColor: headerColor,
-    },
-    headerTitleStyle: {
-      color: 'white'
-    },
-    headerLeft: <BackButton navigation={navigation} path={'Home'} />
-  })
 
   render () {
     const { navigate, state: { params: { title } } } = this.props.navigation
@@ -44,14 +33,6 @@ class DeckDetail extends React.Component {
     )
   }
 }
-
-// const BackButton = ({navigation, path}) => {
-//   return (
-//     <TouchableHighlight onPress={()=>navigation.goBack()}>
-//       <Ionicons name='ios-arrow-back' size={30} color='#8091a5' />
-//     </TouchableHighlight>
-//   )
-// }
 
 const connectDeckDetail = connect(({storage})=>({storage}))(DeckDetail)
 
