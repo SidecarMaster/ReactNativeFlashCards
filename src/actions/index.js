@@ -1,6 +1,7 @@
 export const ALL_INFO = 'ALL_INFO'
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD = 'ADD_CARD'
+export const DELETE_DECK = 'DELETE_DECK'
 
 export function allInfo(data) {
   return {
@@ -21,5 +22,12 @@ export function addCard(title, card) {
     type: ADD_CARD,
     title,
     card,
+  }
+}
+
+export function deleteDeck(title) {
+  return {
+    type: DELETE_DECK,
+    title
   }
 }

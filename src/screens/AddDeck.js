@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, reset } from 'redux-form'
 
 import { Card, CardSection, Form, Title, Input, Button } from '../components/common'
 import { addDeck } from '../actions'
@@ -11,7 +11,7 @@ class AddDeck extends React.Component {
   // When you use Redux form, your class property will be overwritten. You must put navigationOptions in TabNavigator.
 
   onButtonPress = (values) => {
-    const { navigation } = this.props
+    const { goBack } = this.props.navigation
 
     // save deck title to Redux store
     this.props.addDeck(values.deckTitle)
@@ -19,8 +19,11 @@ class AddDeck extends React.Component {
     // save deck title to AsyncStorage
     saveDeckTitle(values.deckTitle)
 
-    // navigate to Home
-    navigation.navigate('Home')
+    // manually reset redux-form, maybe because this addDeck action is asynchronous
+    this.props.dispatch(reset('addDeckForm'))
+
+    // goBack()
+    goBack()
 
   }
 

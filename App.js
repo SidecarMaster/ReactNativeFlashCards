@@ -33,7 +33,7 @@ const Home = TabNavigator({
   },
   AddDeck: {
     screen: connectAddDeck,
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
       title: 'Add Deck',
       tabBarIcon: ({tintColor})=><Ionicons name='ios-add' size={tabBarIconSize} color={tintColor} />,
       headerStyle: {
@@ -42,7 +42,8 @@ const Home = TabNavigator({
       headerTitleStyle: {
         color: 'white'
       },
-    }
+      headerLeft: <BackButton navigation={navigation}/>,
+    })
   }
 },{
   tabBarOptions: {
