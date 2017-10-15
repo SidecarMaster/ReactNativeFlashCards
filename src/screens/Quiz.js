@@ -6,7 +6,14 @@ import { Card, CardSection, Title } from '../components/common'
 const SCREEN_WIDTH = Dimensions.get('window').width
 const FLIPCARD_HEIGHT = 300
 
-class Quiz extends React.Component {
+// PureComponent a little bit faster in performance wise,
+// basically PureComponent prevents unnecessary re-renders.
+// PureComponent is exactly like React.Component with one difference:
+// it implements shouldComponentUpdate. This allows it to prevent renders based on some heuristic.
+// It implements this as a shallow equality check on the new props vs the old props, and likewise for state.
+// https://reactjs.org/docs/react-api.html#reactpurecomponent
+
+class Quiz extends React.PureComponent {
 
   state = {
     index: 0,
@@ -18,7 +25,6 @@ class Quiz extends React.Component {
     this.swipeAnimation = new Animated.ValueXY()
 
     this.flipAnimation = new Animated.Value(0)
-    this.flipValue = 0
     this.flipAnimation.addListener(({value})=>{
       this.value = value
     })
@@ -37,18 +43,22 @@ class Quiz extends React.Component {
       Animated.spring(this.flipAnimation,{
         toValue: 0,
         friction: 8,
-        tension: 10
+        tension: 10,
       }).start();
     } else {
       Animated.spring(this.flipAnimation,{
         toValue: 180,
         friction: 8,
-        tension: 10
+        tension: 10,
       }).start();
     }
   }
 
   response = (response) => {
+    // flipCard() if the back of card is in the front.
+    // this is a workaround for the problem that if the back of card is in the front,
+    // and you go to the next card, what is being shown is the next Answer not the Question.
+    if(this.value>=90){this.flipCard()}
     // Use Animated.timing here, because spring has a bouncing effect that,
     // after the card disappear off the screen, it will bounce off the screen for half a second,
     // and then render the next card. Your user won't see the bouncing effect, they will have
@@ -70,7 +80,7 @@ class Quiz extends React.Component {
   }
 
   render () {
-    const { state : { params : { title, questions } } } = this.props.navigation
+    const { goBack, state : { params : { title, questions } } } = this.props.navigation
     const { score, index } = this.state
     const questionsNo = questions.length
 
@@ -79,10 +89,15 @@ class Quiz extends React.Component {
         <Card>
           <CardSection>
             <Text style={styles.resultStyle}>
-              {`👏🏻👏🏻 I got the answers to
-${Math.round(score/questionsNo*100)}% of the questions. 👏🏻👏🏻`}
+              {`👏🏻👏🏻 I got the answers to ${Math.round(score/questionsNo*100)}% of the questions. 👏🏻👏🏻`}
             </Text>
           </CardSection>
+          <Button
+            onPress={()=>{this.setState({index:0, score:0})}}
+            title='Restart Quiz' />
+          <Button
+            onPress={()=>{goBack()}}
+            title='Back to Deck' />
         </Card>
       )
     }
