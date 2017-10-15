@@ -7,31 +7,22 @@ import {
 
 export * from './types'
 
-export function allInfo(data) {
-  return {
-    type: ALL_INFO,
-    data
-  }
-}
+export const allInfo = data => ({
+  type: ALL_INFO,
+  payload: data
+})
 
-export function addDeck(title) {
-  return {
-    type: ADD_DECK,
-    title,
-  }
-}
+export const addDeck = title => ({
+  type: ADD_DECK,
+  payload: title,
+})
 
-export function addCard(title, card) {
-  return {
-    type: ADD_CARD,
-    title,
-    card,
-  }
-}
+export const addCard = (title, card) => ({
+  type: ADD_CARD,
+  payload: {title, card}
+})
 
-export function deleteDeck(title) {
-  return {
-    type: DELETE_DECK,
-    title
-  }
-}
+export const deleteDeck = title => ({
+  type: DELETE_DECK,
+  payload: title
+})

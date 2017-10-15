@@ -11,19 +11,19 @@ import {
 function storage(state={}, action) {
   switch (action.type) {
     case ALL_INFO:
-      return action.data
+      return action.payload
     case ADD_DECK:
       return {...state,
-        [action.title]:{title:action.title, questions:[]}
+        [action.payload]:{title:action.payload, questions:[]}
       }
     case ADD_CARD:
-      const { title, card: {question, answer} } = action
+      const { title, card: {question, answer} } = action.payload
       return {...state,
         [title]:{title, questions:[...state[`${title}`].questions, {question, answer}]}
       }
     case DELETE_DECK:
       let newState={...state}
-      delete newState[`${action.title}`]
+      delete newState[`${action.payload}`]
       return newState
     default:
       return state
