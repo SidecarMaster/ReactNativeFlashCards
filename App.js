@@ -42,7 +42,7 @@ const Home = TabNavigator({
       headerTitleStyle: {
         color: 'white'
       },
-      headerLeft: <BackButton navigation={navigation}/>,
+      // headerLeft: <BackButton navigation={navigation}/>,
     })
   }
 },{
@@ -75,7 +75,7 @@ const Stacks = StackNavigator({
       headerTitleStyle: {
         color: 'white'
       },
-      headerLeft: <BackButton navigation={navigation}/>
+      // headerLeft: <BackButton navigation={navigation}/>
     })
   },
   AddCard: {
@@ -88,7 +88,7 @@ const Stacks = StackNavigator({
       headerTitleStyle: {
         color: 'white'
       },
-      headerLeft: <BackButton navigation={navigation}/>
+      // headerLeft: <BackButton navigation={navigation}/>
     })
   },
   Quiz: {
@@ -101,7 +101,7 @@ const Stacks = StackNavigator({
       headerTitleStyle: {
         color: 'white'
       },
-      headerLeft: <BackButton navigation={navigation}/>
+      // headerLeft: <BackButton navigation={navigation}/>
     })
   },
 },{

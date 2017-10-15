@@ -52,10 +52,6 @@ class DeckList extends React.Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//
-// })
-
 const connectDeckList = connect(({storage})=>({storage}), {allInfo})(DeckList)
 
 export { connectDeckList };

@@ -1,7 +1,11 @@
-export const ALL_INFO = 'ALL_INFO'
-export const ADD_DECK = 'ADD_DECK'
-export const ADD_CARD = 'ADD_CARD'
-export const DELETE_DECK = 'DELETE_DECK'
+import {
+  ALL_INFO,
+  ADD_DECK,
+  ADD_CARD,
+  DELETE_DECK,
+} from './types'
+
+export * from './types'
 
 export function allInfo(data) {
   return {
